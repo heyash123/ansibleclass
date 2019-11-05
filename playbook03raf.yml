@@ -1,0 +1,27 @@
+---
+- name:  helping out raf with copy, copy
+  hosts: planetexpress
+  tasks:
+          ###  copy the tarzip to our targets host
+          - name: copy to target
+            copy:
+                    src: ~/ans/files/demoscript.tar.gz
+                    dest: ~/
+
+
+          ### untar/unzip (archive) our file on target host
+          - name:  untar and unzip our fire
+            unarchive:
+                    remote_src: yes
+                    src: ~/demoscript.tar.gz
+                    dest: ~/
+          
+          ## check CHECKSUM of script
+          - name: grab md5 
+            stat:
+                    checksum_algorithm: md5
+                    path: ~/demoscript.py
+            register: raffact
+#
+### run our SCRIPT only IF checksum is correct)
+#  

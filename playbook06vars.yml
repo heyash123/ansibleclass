@@ -1,0 +1,28 @@
+---
+- name: learning about vars and var recall
+  hosts: planetexpress
+
+  vars:
+          listofips:
+                  - 192.168.10.1
+                  - 192.168.10.2
+                  - 192.168.10.3
+                  - 192.168.10.4
+          dlurl:  "https://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+       
+  tasks:
+          - name: Just print to the screen the value of listofips
+            debug:
+                   var: listofips
+
+          - name: Show a second way to print to the screen the value of listofips
+            debug: 
+                   msg:  "i want this msg to appear o nthe screen {{ listofips }}"
+
+          - name: Download a critical pdf
+            get_url:
+                    url: "{{ dlurl }}"
+                    dest: ~/
+
+
+
